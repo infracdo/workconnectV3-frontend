@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="hHh LpR fFf">
+    <q-header elevated class="text-black">
       <q-toolbar>
         <q-btn
           flat
@@ -12,10 +12,44 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          workconnect
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div v-if="$keycloak.authenticated">
+          {{ $keycloak.tokenParsed.preferred_username }}
+          <q-btn-dropdown
+            flat round dense
+            icon="account_circle"
+            size="20px"
+          >
+            <div class="column no-wrap q-pa-md">
+              <div class="row items-center">
+                <q-icon
+                  name="account_circle"
+                  size="40px"
+                />
+                <div class="q-ml-xs">
+                  <p class="q-ma-none">{{ $keycloak.tokenParsed.preferred_username }}</p>
+                  <p class="q-ma-none">{{ $keycloak.tokenParsed.email }}</p>
+                </div>
+              </div>
+
+              <q-separator class="q-my-md" />
+
+              <div class="row items-center">
+                <q-btn flat class="q-pa-none" @click="logout">
+                  <q-icon
+                    name="logout"
+                    size="40px"
+                  />
+                  <div class="q-ml-xs">
+                    <p class="q-ma-none">Logout</p>
+                  </div>
+                </q-btn>
+              </div>
+            </div>
+          </q-btn-dropdown>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -25,14 +59,9 @@
       bordered
     >
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
 
         <EssentialLink
-          v-for="link in linksList"
+          v-for="link in filteredLinksList"
           :key="link.title"
           v-bind="link"
         />
@@ -48,55 +77,78 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { keycloak } from 'src/boot/keycloak'
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'Down Dashboard',
+    icon: 'dashboard',
+    url: '/dashboard'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: 'Down Circuits',
+    icon: 'router',
+    url: '/down-circuits',
+    requiredRoles: ['GROUP_PSC_USERS']
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    title: 'Stores',
+    icon: 'location_on',
+    url: '/stores',
+    requiredRoles: ['GROUP_APOLLO_OPERATIONS']
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    title: 'Circuit Provider Report',
+    icon: 'trending_up',
+    url: '/circuit-provider-report',
+    requiredRoles: ['GROUP_APOLLO_PROD_SUPPORT']
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    title: 'Cliqq Wifi Report',
+    icon: 'trending_up',
+    url: '/cliqq-wifi-report'
   },
   {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
+    title: 'Store Status Report',
+    icon: 'summarize',
+    url: '/store-status-report'
   },
   {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+    title: 'Zabbix Report',
+    icon: 'summarize',
+    url: '/zabbix-report'
+  },
+  {
+    title: 'Provisioning',
+    icon: 'add_circle',
+    url: '/provisioning'
+  },
+  {
+    title: 'Activity Log',
+    icon: 'list',
+    url: '/activity-log'
+  },
+  {
+    title: 'Circuits Log',
+    icon: 'route',
+    url: '/circuits-log'
   }
 ]
 
 const leftDrawerOpen = ref(false)
 
+const filteredLinksList = linksList.filter(link => {
+  const userRoles = keycloak.tokenParsed?.realm_access?.roles || [];
+  return !link.requiredRoles || link.requiredRoles.some(role => userRoles.includes(role));
+});
+
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+function logout() {
+  keycloak.logout({
+    redirectUri: window.location.origin
+  })
 }
 </script>
