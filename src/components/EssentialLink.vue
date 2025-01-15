@@ -1,9 +1,9 @@
 <template>
   <q-item
     clickable
-    tag="a"
-    target="_blank"
-    :href="props.link"
+    tag="router-link"
+    :to="props.url"
+    exact
   >
     <q-item-section
       v-if="props.icon"
@@ -14,7 +14,6 @@
 
     <q-item-section>
       <q-item-label>{{ props.title }}</q-item-label>
-      <q-item-label caption>{{ props.caption }}</q-item-label>
     </q-item-section>
   </q-item>
 </template>
@@ -26,19 +25,14 @@ const props = defineProps({
     required: true
   },
 
-  caption: {
-    type: String,
-    default: ''
-  },
-
-  link: {
-    type: String,
-    default: '#'
-  },
-
   icon: {
     type: String,
     default: ''
+  },
+
+  url: {
+    type: String,
+    required: true
   }
 })
 </script>
