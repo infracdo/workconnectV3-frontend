@@ -78,67 +78,68 @@
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 import { keycloak } from 'src/boot/keycloak'
+import { rolesConfig, allRoles } from 'src/config/roles'
 
 const linksList = [
   {
     title: 'Down Dashboard',
     icon: 'dashboard',
     url: '/dashboard',
-    requiredRoles: ['admin', 'GROUP_PSC_USERS', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT']
+    requiredRoles: allRoles
   },
   {
     title: 'Down Circuits',
     icon: 'router',
     url: '/down-circuits',
-    requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS']
+    requiredRoles: rolesConfig['down-circuits']
   },
   {
     title: 'Stores',
     icon: 'location_on',
     url: '/stores',
-    requiredRoles: ['admin', 'GROUP_PSC_USERS']
+    requiredRoles: rolesConfig['stores']
   },
   {
     title: 'Circuit Provider Report',
     icon: 'trending_up',
     url: '/circuit-provider-report',
-    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT']
+    requiredRoles: rolesConfig['circuit-provider-report']
   },
   {
     title: 'Cliqq Wifi Report',
     icon: 'trending_up',
     url: '/cliqq-wifi-report',
-    requiredRoles: ['admin', 'GROUP_PSC_USERS']
+    requiredRoles: rolesConfig['cliqq-wifi-report']
   },
   {
     title: 'Store Status Report',
     icon: 'summarize',
     url: '/store-status-report',
-    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT']
+    requiredRoles: rolesConfig['store-status-report']
   },
   {
     title: 'Zabbix Report',
     icon: 'summarize',
     url: '/zabbix-report',
-    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT']
+    requiredRoles: rolesConfig['zabbix-report']
   },
   {
     title: 'Provisioning',
     icon: 'add_circle',
     url: '/provisioning',
-    requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS']
+    requiredRoles: rolesConfig['provisioning']
   },
   {
     title: 'Activity Log',
     icon: 'list',
     url: '/activity-log',
-    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT', 'GROUP_APOLLO_OPERATIONS']
+    requiredRoles: rolesConfig['activity-log']
   },
   {
     title: 'Circuits Log',
     icon: 'route',
     url: '/circuits-log',
-    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT', 'GROUP_APOLLO_OPERATIONS']
+    requiredRoles: rolesConfig['circuits-log']
   }
 ]
 

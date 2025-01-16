@@ -1,4 +1,5 @@
 import { setErrorState } from 'src/utils/errorHandler'
+import { rolesConfig } from 'src/config/roles';
 
 const routes = [
   {
@@ -13,55 +14,55 @@ const routes = [
       {
         path: 'down-circuits',
         component: () => import('pages/DownCircuitsPage.vue'),
-        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS'] }
+        meta: { requiredRoles: rolesConfig['down-circuits'] }
       },
 
       {
         path: 'stores',
         component: () => import('pages/StoresPage.vue'),
-        meta: { requiredRoles: ['admin', 'GROUP_PSC_USERS'] }
+        meta: { requiredRoles: rolesConfig['stores'] }
       },
 
       {
         path: 'circuit-provider-report',
         component: () => import('pages/CircuitProviderReportPage.vue'),
-        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT'] }
+        meta: { requiredRoles: rolesConfig['circuit-provider-report'] }
       },
 
       {
         path: 'cliqq-wifi-report',
         component: () => import('pages/CliqqWifiReportPage.vue'),
-        meta: { requiredRoles: ['admin', 'GROUP_PSC_USERS'] }
+        meta: { requiredRoles: rolesConfig['cliqq-wifi-report'] }
       },
 
       {
         path: 'store-status-report',
         component: () => import('src/pages/StoreStatusReportPage.vue'),
-        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT'] }
+        meta: { requiredRoles: rolesConfig['store-status-report'] }
       },
 
       {
         path: 'zabbix-report',
         component: () => import('pages/ZabbixReportPage.vue'),
-        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT'] }
+        meta: { requiredRoles: rolesConfig['zabbix-report'] }
       },
 
       {
         path: 'provisioning',
         component: () => import('pages/ProvisioningPage.vue'),
-        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS'] }
+        meta: { requiredRoles: rolesConfig['provisioning'] }
       },
 
       {
         path: 'activity-log',
         component: () => import('pages/ActivityLogPage.vue'),
-        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT'] }
+        meta: { requiredRoles: rolesConfig['activity-log'] }
       },
 
       {
         path: 'circuits-log',
         component: () => import('pages/CircuitsLogPage.vue'),
-        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT'] }
+        meta: { requiredRoles: rolesConfig['circuits-log'] }
       },
     ]
   },
