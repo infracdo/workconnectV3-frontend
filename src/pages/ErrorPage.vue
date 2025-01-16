@@ -2,11 +2,11 @@
   <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
     <div>
       <div style="font-size: 30vh">
-        404
+        {{ errorState.errorCode }} <!-- Display error code -->
       </div>
 
       <div class="text-h2" style="opacity:.4">
-        Oops. Nothing here...
+        {{ errorState.errorMessage }} <!-- Display error message -->
       </div>
 
       <q-btn
@@ -14,7 +14,7 @@
         color="white"
         text-color="blue"
         unelevated
-        to="/"
+        to="/dashboard"
         label="Go Home"
         no-caps
       />
@@ -23,5 +23,8 @@
 </template>
 
 <script setup>
-//
+import { getErrorState } from 'src/utils/errorHandler';
+
+// Fetch error state for error codes and messages
+const errorState = getErrorState();
 </script>

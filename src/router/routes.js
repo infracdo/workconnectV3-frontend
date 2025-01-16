@@ -1,69 +1,92 @@
+import { setErrorState } from 'src/utils/errorHandler'
+
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue',),
+    component: () => import('layouts/MainLayout.vue'),
     children: [
       {
         path: 'dashboard',
         component: () => import('src/pages/DownDashboardPage.vue'),
-        meta: { requiredRoles: ['GROUP_PSC_USERS'] }
       },
 
       {
         path: 'down-circuits',
         component: () => import('pages/DownCircuitsPage.vue'),
-        meta: { requiredRoles: ['GROUP_PSC_USERS'] }
+        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS'] }
       },
 
       {
         path: 'stores',
         component: () => import('pages/StoresPage.vue'),
-        meta: { requiredRoles: ['GROUP_APOLLO_OPERATIONS'] }
+        meta: { requiredRoles: ['admin', 'GROUP_PSC_USERS'] }
       },
 
       {
         path: 'circuit-provider-report',
         component: () => import('pages/CircuitProviderReportPage.vue'),
-        meta: { requiredRoles: ['GROUP_APOLLO_PROD_SUPPORT'] }
+        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT'] }
       },
 
       {
         path: 'cliqq-wifi-report',
-        component: () => import('pages/CliqqWifiReportPage.vue')
+        component: () => import('pages/CliqqWifiReportPage.vue'),
+        meta: { requiredRoles: ['admin', 'GROUP_PSC_USERS'] }
       },
 
       {
         path: 'store-status-report',
-        component: () => import('src/pages/StoreStatusReportPage.vue')
+        component: () => import('src/pages/StoreStatusReportPage.vue'),
+        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT'] }
       },
 
       {
         path: 'zabbix-report',
-        component: () => import('pages/ZabbixReportPage.vue')
+        component: () => import('pages/ZabbixReportPage.vue'),
+        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT'] }
       },
 
       {
         path: 'provisioning',
-        component: () => import('pages/ProvisioningPage.vue')
+        component: () => import('pages/ProvisioningPage.vue'),
+        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS'] }
       },
 
       {
         path: 'activity-log',
-        component: () => import('pages/ActivityLogPage.vue')
+        component: () => import('pages/ActivityLogPage.vue'),
+        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT'] }
       },
 
       {
         path: 'circuits-log',
-        component: () => import('pages/CircuitsLogPage.vue')
+        component: () => import('pages/CircuitsLogPage.vue'),
+        meta: { requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT'] }
       },
     ]
   },
 
   // Always leave this as last one,
   // but you can also remove it
+
+  // Display 404 Not Found Error Page if the user navigates to the non-existent page
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
+    component: () => import('src/pages/ErrorPage.vue'),
+    beforeEnter: (to, from, next) => {
+      setErrorState('404', 'Page Not Found');
+      next();
+    }
+  },
+
+  // Display 403 Unauthorized Page if the user doesn't have the required role to access the page
+  {
+    path: '/unauthorized',
+    component: () => import('src/pages/ErrorPage.vue'),
+    beforeEnter: (to, from, next) => {
+      setErrorState('403', 'You do not have access to this page.');
+      next();
+    }
   }
 ]
 

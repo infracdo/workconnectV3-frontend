@@ -16,6 +16,6 @@ import { keycloak } from 'src/boot/keycloak';
 
 const hasAccess = computed(() => {
   const userRoles = keycloak.tokenParsed?.realm_access?.roles || [];
-  return userRoles.includes('GROUP_APOLLO_PROD_SUPPORT');
+  return userRoles.includes('admin') || userRoles.includes('GROUP_APOLLO_PROD_SUPPORT');
 });
 </script>

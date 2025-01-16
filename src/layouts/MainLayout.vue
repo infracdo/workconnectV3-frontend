@@ -83,55 +83,62 @@ const linksList = [
   {
     title: 'Down Dashboard',
     icon: 'dashboard',
-    url: '/dashboard'
+    url: '/dashboard',
+    requiredRoles: ['admin', 'GROUP_PSC_USERS', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT']
   },
   {
     title: 'Down Circuits',
     icon: 'router',
     url: '/down-circuits',
-    requiredRoles: ['GROUP_PSC_USERS']
+    requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS']
   },
   {
     title: 'Stores',
     icon: 'location_on',
     url: '/stores',
-    requiredRoles: ['GROUP_APOLLO_OPERATIONS']
+    requiredRoles: ['admin', 'GROUP_PSC_USERS']
   },
   {
     title: 'Circuit Provider Report',
     icon: 'trending_up',
     url: '/circuit-provider-report',
-    requiredRoles: ['GROUP_APOLLO_PROD_SUPPORT']
+    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT']
   },
   {
     title: 'Cliqq Wifi Report',
     icon: 'trending_up',
-    url: '/cliqq-wifi-report'
+    url: '/cliqq-wifi-report',
+    requiredRoles: ['admin', 'GROUP_PSC_USERS']
   },
   {
     title: 'Store Status Report',
     icon: 'summarize',
-    url: '/store-status-report'
+    url: '/store-status-report',
+    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT']
   },
   {
     title: 'Zabbix Report',
     icon: 'summarize',
-    url: '/zabbix-report'
+    url: '/zabbix-report',
+    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT']
   },
   {
     title: 'Provisioning',
     icon: 'add_circle',
-    url: '/provisioning'
+    url: '/provisioning',
+    requiredRoles: ['admin', 'GROUP_APOLLO_OPERATIONS']
   },
   {
     title: 'Activity Log',
     icon: 'list',
-    url: '/activity-log'
+    url: '/activity-log',
+    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT', 'GROUP_APOLLO_OPERATIONS']
   },
   {
     title: 'Circuits Log',
     icon: 'route',
-    url: '/circuits-log'
+    url: '/circuits-log',
+    requiredRoles: ['admin', 'GROUP_APOLLO_PROD_SUPPORT', 'GROUP_APOLLO_OPERATIONS']
   }
 ]
 

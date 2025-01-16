@@ -1,11 +1,21 @@
 <template>
   <q-page padding>
-    <p>Store Status Report Page</p>
+    <div v-if="hasAccess">
+      <p>Store Status Report Page</p>
+    </div>
+
+    <div v-else>
+      <p>You do not have access to this page.</p>
+    </div>
   </q-page>
 </template>
 
-<script>
-</script>
+<script setup>
+import { computed } from 'vue';
+import { keycloak } from 'src/boot/keycloak';
 
-<style>
-</style>
+const hasAccess = computed(() => {
+  const userRoles = keycloak.tokenParsed?.realm_access?.roles || [];
+  return userRoles.includes('admin') || userRoles.includes('GROUP_APOLLO_PROD_SUPPORT');
+});
+</script>
