@@ -1,3 +1,4 @@
+// User roles configuration for each pages
 export const rolesConfig = {
   'down-circuits': ['admin', 'GROUP_APOLLO_OPERATIONS'],
   'stores': ['admin', 'GROUP_PSC_USERS'],
@@ -10,6 +11,7 @@ export const rolesConfig = {
   'circuits-log': ['admin', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT', 'GROUP_APOLLO_USER']
 }
 
+// All user roles
 export const allRoles = [
   'admin',
   'GROUP_PSC_USERS',

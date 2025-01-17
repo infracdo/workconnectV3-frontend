@@ -1,7 +1,10 @@
 <template>
   <q-layout view="hHh LpR fFf">
+    <!-- Navbar -->
     <q-header elevated class="text-black">
       <q-toolbar>
+
+        <!-- Toggle button for left drawer -->
         <q-btn
           flat
           dense
@@ -11,12 +14,15 @@
           @click="toggleLeftDrawer"
         />
 
+        <!-- Navbar title -->
         <q-toolbar-title>
           workconnect
         </q-toolbar-title>
 
+        <!-- Display username based from keycloak -->
         <div v-if="$keycloak.authenticated">
           {{ $keycloak.tokenParsed.preferred_username }}
+          <!-- User account options -->
           <q-btn-dropdown
             flat round dense
             icon="account_circle"
@@ -28,6 +34,7 @@
                   name="account_circle"
                   size="40px"
                 />
+                <!-- Display username and email of user based from keycloak -->
                 <div class="q-ml-xs">
                   <p class="q-ma-none">{{ $keycloak.tokenParsed.preferred_username }}</p>
                   <p class="q-ma-none">{{ $keycloak.tokenParsed.email }}</p>
@@ -36,6 +43,7 @@
 
               <q-separator class="q-my-md" />
 
+              <!-- Logout button that redirects user to the keycloak login page -->
               <div class="row items-center">
                 <q-btn flat class="q-pa-none" @click="logout">
                   <q-icon
@@ -53,6 +61,7 @@
       </q-toolbar>
     </q-header>
 
+    <!-- Left drawer -->
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
@@ -60,6 +69,7 @@
     >
       <q-list>
 
+        <!-- Navigation links for pages -->
         <EssentialLink
           v-for="link in filteredLinksList"
           :key="link.title"
@@ -80,6 +90,7 @@ import EssentialLink from 'components/EssentialLink.vue'
 import { keycloak } from 'src/boot/keycloak'
 import { rolesConfig, allRoles } from 'src/config/roles'
 
+// Navigation links for left drawer
 const linksList = [
   {
     title: 'Down Dashboard',
@@ -145,6 +156,7 @@ const linksList = [
 
 const leftDrawerOpen = ref(false)
 
+// Display navigation links depending on the role/s set to user
 const filteredLinksList = linksList.filter(link => {
   const userRoles = keycloak.tokenParsed?.realm_access?.roles || [];
   return !link.requiredRoles || link.requiredRoles.some(role => userRoles.includes(role));
@@ -154,6 +166,7 @@ function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 
+// logout function to redirect user to the keycloak login page
 function logout() {
   keycloak.logout({
     redirectUri: window.location.origin

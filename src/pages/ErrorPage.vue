@@ -1,14 +1,17 @@
 <template>
   <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
     <div>
+      <!-- Display error code -->
       <div style="font-size: 30vh">
-        {{ errorState.errorCode }} <!-- Display error code -->
+        {{ errorState.errorCode }}
       </div>
 
+      <!-- Display error message -->
       <div class="text-h2" style="opacity:.4">
-        {{ errorState.errorMessage }} <!-- Display error message -->
+        {{ errorState.errorMessage }}
       </div>
 
+      <!-- Go home button to redirect to dashboard when user is lost -->
       <q-btn
         class="q-mt-xl"
         color="white"

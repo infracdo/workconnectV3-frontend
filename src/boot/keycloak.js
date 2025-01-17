@@ -12,7 +12,7 @@ export default boot(({ app, router }) => {
   let isKeycloakInitialized = false;
 
   keycloak
-    .init({ onLoad: 'login-required' })
+    .init({ onLoad: 'login-required', checkLoginIframe: false })
     .then((authenticated) => {
       if (authenticated) {
         // Store the Keycloak instance globally for accessibility
