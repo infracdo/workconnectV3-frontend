@@ -7,7 +7,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: 'dashboard',
+        path: '',
         component: () => import('src/pages/DownDashboardPage.vue'),
       },
 

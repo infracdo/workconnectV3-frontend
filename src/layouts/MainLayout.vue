@@ -95,7 +95,7 @@ const linksList = [
   {
     title: 'Down Dashboard',
     icon: 'dashboard',
-    url: '/dashboard',
+    url: '/',
     requiredRoles: allRoles
   },
   {

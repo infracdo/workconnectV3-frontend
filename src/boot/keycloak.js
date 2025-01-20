@@ -8,11 +8,12 @@ const keycloak = new Keycloak({
   clientId: process.env.VITE_KEYCLOAK_CLIENT_ID, // Reads Keycloak configurations from the .env file
 });
 
+// Start keycloak at boot (before the app is mounted)
 export default boot(({ app, router }) => {
   let isKeycloakInitialized = false;
 
   keycloak
-    .init({ onLoad: 'login-required', checkLoginIframe: false })
+    .init({ onLoad: 'login-required', checkLoginIframe: false }) // Initialize keycloak with login-required option
     .then((authenticated) => {
       if (authenticated) {
         // Store the Keycloak instance globally for accessibility
@@ -27,7 +28,7 @@ export default boot(({ app, router }) => {
         isKeycloakInitialized = true; // Initialize to true
 
         // Redirect the user to the dashboard page
-        router.push('/dashboard');
+        router.push('/');
       } else {
         // Logs if the user is not authenticated
         console.warn('User not authenticated');
