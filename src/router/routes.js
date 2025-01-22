@@ -1,5 +1,5 @@
 import { setErrorState } from 'src/utils/errorHandler'
-import { rolesConfig } from 'src/config/roles';
+import { rolesConfig } from 'src/config/rolesConfig';
 
 const routes = [
   {

@@ -85,10 +85,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
-import { keycloak } from 'src/boot/keycloak'
-import { rolesConfig, allRoles } from 'src/config/roles'
+import { ref } from 'vue';
+import EssentialLink from 'components/EssentialLink.vue';
+import { keycloak } from 'src/boot/keycloak';
+import { rolesConfig, allRoles } from 'src/config/rolesConfig';
 
 // Navigation links for left drawer
 const linksList = [

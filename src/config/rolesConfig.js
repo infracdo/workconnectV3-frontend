@@ -1,5 +1,6 @@
-// User roles configuration for each pages
+// User roles configuration
 export const rolesConfig = {
+  // Specific for each pages (routes)
   'down-circuits': ['admin', 'GROUP_APOLLO_OPERATIONS'],
   'stores': ['admin', 'GROUP_PSC_USERS'],
   'circuit-provider-report': ['admin', 'GROUP_APOLLO_PROD_SUPPORT'],
@@ -8,10 +9,13 @@ export const rolesConfig = {
   'zabbix-report': ['admin', 'GROUP_APOLLO_PROD_SUPPORT'],
   'provisioning': ['admin', 'GROUP_APOLLO_OPERATIONS'],
   'activity-log': ['admin', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT'],
-  'circuits-log': ['admin', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT', 'GROUP_APOLLO_USER']
+  'circuits-log': ['admin', 'GROUP_APOLLO_OPERATIONS', 'GROUP_APOLLO_PROD_SUPPORT', 'GROUP_APOLLO_USER'],
+
+  // Components specific config
+  'down-stores-card': { deny: ['GROUP_PSC_USERS'] },
 }
 
-// All user roles
+// All user roles for setting to 'all'
 export const allRoles = [
   'admin',
   'GROUP_PSC_USERS',
