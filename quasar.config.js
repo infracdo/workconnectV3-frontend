@@ -91,7 +91,7 @@ module.exports = configure(function (ctx) {
         VUE_APP_WORKCONNECT_API_URL: ctx.debug
           ? "http://192.168.61.42:7500"
           : ctx.prod
-          ? "https://wcv2-be-test.am1-aks.apolloglobal.net"
+          ? "https://wcv2-be-test.am1-aks.apolloglobal.net:7500"
           : "http://192.168.61.42:7500",
 
         VUE_APP_ELASTICSEARCH_URL: "http://192.168.43.60:5601/",
